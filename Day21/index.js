@@ -20,9 +20,15 @@ app.get('/articles/rest-api', (req, res) =>{
         data : 'Article Info',
         message : 'API Call Successful'
     };
-    res.json()
-})
+    res.json(responseObj)
+});
 
+app.get('/:city/:location', (req, res) => {
+    var city = req.params.city;
+    var location = req.params.location;
+    res.send(`My URL has city as ${city} and location as ${location}`)
+});
+// Created Dynamic URL
 
 
 app.listen(port, () =>{
