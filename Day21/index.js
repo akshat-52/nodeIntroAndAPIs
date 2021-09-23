@@ -7,6 +7,10 @@ app.get('/',(req, res)=>{
     res.send("Hey, Yo. Local Host Check");
 });
 
+app.get('/articles',(req, res)=>{
+    res.send("On Articles Page");
+});
+
 app.listen(port, () =>{
     console.log(`Listening at http://localhost:${port} `)
 })
