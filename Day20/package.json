@@ -1,0 +1,14 @@
+{
+  "name": "node-intro",
+  "version": "1.0.0",
+  "description": "note intro",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "akshat",
+  "license": "ISC",
+  "dependencies": {
+    "http": "0.0.1-security"
+  }
+}
