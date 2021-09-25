@@ -23,6 +23,19 @@ app.get('/articles/rest-api', (req, res) =>{
     res.json(responseObj)
 });
 
+
+app.get('/articles:rest-api', (req, res) =>{
+
+    var rest_name=req.params.rest
+    const responseObj = {
+        data : {
+            rest : rest_name
+        },
+        message : 'API Call Successful'
+    };
+    res.json(responseObj)
+});
+
 app.get('/:city/:location', (req, res) => {
     var city = req.params.city;
     var location = req.params.location;
