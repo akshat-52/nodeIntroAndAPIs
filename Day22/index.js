@@ -24,14 +24,43 @@ const port ='8000';
  * @route  /books
  * @description "API to get all books"
  * @method GET
- * @params
+ * @params NA
  * @return_Type JSON Object
  * 
 */
 
+app.get("/", (req, res) =>{
+    res.send("Welcome to Book Management APIs");
+})
+
 app.get("/books", (req, res) =>{
     var books = db.books;
     res.json(books);
+})
+
+app.get("books/:isbn", (req, res) =>{
+    const {
+        isbn
+    } = req.params;
+    var result = db.books.filter((book) => book.ISBN === isbn);
+
+    console.log(result);
+    var responseObj = {};
+
+    if (result.length == 0) {
+        responseObj = {
+            data: [],
+            message:`No Book found for the ISBN of ${isbn}`,
+            status: 404
+        }
+    } else{
+        var book = result[0];
+        responseObj = {
+            data: book,
+            message: `${book.title} found for the ISBN of ${isbn} `
+        }
+    }
+
 })
 
 
