@@ -48,7 +48,7 @@ app.get("/books", (req, res) =>{
 
     console.log(book_id, category);
 
-    if (book_id ! == undefined) {
+    if (book_id == undefined) {
         books = books.filter(book => book.book_id === book_id);
     }
 
