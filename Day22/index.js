@@ -144,13 +144,53 @@ res.json(book);
         var book = result[0];
         responseObj = {
             data: book,
-            message: `${book.title} found for the ISBN of ${isbn} `
+            message: `${book.title} found for the ISBN of ${isbn} `,
+            status: 200
         }
     }
+    res.json(responseObj);
 
 })
 
+/** 
+ *
+ * @route  /books/category/:category
+ * @description "API to Get all of books based category"
+ * @method GET
+ * @params category -- Route Param
+ * @return_Type JSON Object
+ * 
+*/
 
+app.get("/books/category/:category/author/:author", (req, res) => {
+    const {
+        category
+    } = req.params;
+
+    var result = db.books.filter(book => book.category.includes(category));
+    console.log(result);
+
+    var responseObj = {};
+
+    if (result.length == 0) {
+        responseObj = {
+            data: {},
+            message: `No book found for the BOOK ID of ${category}`,
+            status: 404
+        }
+    } else {
+        var titles;
+        for (let i=0; i < result.length; i++)
+            titles += " " + result[i].title;
+
+        responseObj = {
+            data: result,
+            message: `Found ${titles} Books belonging to ${category}`,
+            status: 200
+        }
+    }
+    res.json(responseObj);
+}) 
 
 app.listen(port, () =>{
     console.log(`Listening at http://localhost:${port}`)
