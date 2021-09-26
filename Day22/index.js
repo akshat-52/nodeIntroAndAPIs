@@ -192,6 +192,53 @@ app.get("/books/category/:category/author/:author", (req, res) => {
     res.json(responseObj);
 }) 
 
+
+app.get("/authors/publications/:publisher_id", (req, res) => {
+    const {
+        publisher_id,
+    } = req.params;
+
+
+    var publisher = db.publications.filter((publisher) => publisher.id == publisher_id)[0],
+        result = [];
+
+    /***
+     * AL*ABL*PBL 
+     * 
+     * */
+    for (let i = 0; i < db.authors.length; i++) {
+        const author = db.authors[i];
+        console.log(author);
+        if (author.books.some(item => publisher.books.includes(item)))
+            result.push(author);
+
+        // for (let j = 0; j < author.books.length; j++) {
+        //     if (publisher.books.includes(author.books[i])) {
+        //         result.push(author);
+        //         break;
+        //     }
+        // }
+    }
+
+    var responseObj = {};
+    if (result.length == 0) {
+        responseObj = {
+            data: {},
+            message: `No authors found for publisher of ${publisher.name}`,
+            status: 404
+        }
+    } else {
+        responseObj = {
+            data: result,
+            message: `${result.length} authors found for book ID of ${publisher.name}`,
+            status: 200
+        }
+    }
+
+    res.json(responseObj);
+})
+
+
 app.listen(port, () =>{
     console.log(`Listening at http://localhost:${port}`)
 });
