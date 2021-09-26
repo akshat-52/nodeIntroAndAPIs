@@ -238,6 +238,19 @@ app.get("/authors/publications/:publisher_id", (req, res) => {
     res.json(responseObj);
 })
 
+/*********** post *************
+ * 
+ * 
+ * /BOOK/NEW
+ * /AUTHOR
+ * /PUBLICATION
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
 app.listen(port, () =>{
     console.log(`Listening at http://localhost:${port}`)
