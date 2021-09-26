@@ -38,10 +38,24 @@ app.get("/books", (req, res) =>{
     res.json(books);
 })
 
-app.get("books/:isbn", (req, res) =>{
+app.get("books/:book_id", (req, res) =>{
     const {
-        isbn
+        book_id
     } = req.params;
+
+    var allBooks = db.books;
+    var book = {};
+    for (let i=0; i < allBooks; i++) {
+        const element = allBooks[i];
+        if (book_id === element.book_id) {
+            book = element;
+            break;
+        }
+    }
+
+res.json(book);
+
+/*
     var result = db.books.filter((book) => book.ISBN === isbn);
 
     console.log(result);
@@ -62,8 +76,9 @@ app.get("books/:isbn", (req, res) =>{
     }
 
 })
+*/
 
 
 app.listen(port, () =>{
     console.log(`Listening at http://localhost:${port}`)
-})
+});
